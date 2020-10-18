@@ -237,7 +237,7 @@ void magnum_application()
     auto &sysVehicle = scene.dynamic_system_add<active::SysVehicle>(
                 "Vehicle");
     auto &sysPlanet = scene.dynamic_system_add<active::SysPlanetA>(
-                "Planet");
+                "Planet", g_ospMagnum->get_input_handler());
     auto &sysGravity = scene.dynamic_system_add<active::SysFFGravity>(
                 "FFGravity");
 
@@ -368,6 +368,10 @@ void config_controls()
 
     userInput.config_register_control("ui_rmb", true,
             {{osp::sc_mouse, (int) Mouse::Right, VarTrig::PRESSED, false, VarOp::AND}});
+
+    userInput.config_register_control("debug_planet_update", false,
+            {{0, (int) Key::LeftCtrl, VarTrig::HOLD, false, VarOp::AND},
+             {0, (int) Key::One, VarTrig::PRESSED, false, VarOp::OR}});
 }
 
 void load_a_bunch_of_stuff()

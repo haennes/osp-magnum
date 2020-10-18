@@ -7,6 +7,8 @@
 #include <osp/Active/SysForceFields.h>
 #include <osp/Active/activetypes.h>
 
+#include <osp/UserInputHandler.h>
+
 #include <Magnum/Shaders/MeshVisualizer.h>
 #include <Magnum/GL/Mesh.h>
 
@@ -36,7 +38,8 @@ public:
     //        osp::active::ActiveScene& scene, osp::active::SysAreaAssociate &area,
     //        osp::universe::Satellite areaSat, osp::universe::Satellite loadMe);
 
-    SysPlanetA(osp::active::ActiveScene &scene);
+    SysPlanetA(osp::active::ActiveScene &scene,
+               osp::UserInputHandler &userInput);
     ~SysPlanetA() = default;
 
     osp::active::StatusActivated activate_sat(
@@ -69,6 +72,8 @@ private:
     osp::active::UpdateOrderHandle m_updatePhysics;
 
     osp::active::RenderOrderHandle m_renderPlanetDraw;
+
+    osp::ButtonControlHandle m_debugUpdate;
 };
 
 }
