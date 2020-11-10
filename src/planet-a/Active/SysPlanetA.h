@@ -34,10 +34,6 @@ class SysPlanetA : public osp::active::IDynamicSystem,
 {
 public:
 
-    //static int area_activate_planet(
-    //        osp::active::ActiveScene& scene, osp::active::SysAreaAssociate &area,
-    //        osp::universe::Satellite areaSat, osp::universe::Satellite loadMe);
-
     SysPlanetA(osp::active::ActiveScene &scene,
                osp::UserInputHandler &userInput);
     ~SysPlanetA() = default;

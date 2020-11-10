@@ -272,7 +272,7 @@ void magnum_application()
 
     cameraComp.m_viewport
             = Vector2(Magnum::GL::defaultFramebuffer.viewport().size());
-    cameraComp.m_far = 4096.0f;
+    cameraComp.m_far = 8388608.0f;
     cameraComp.m_near = 0.125f;
     cameraComp.m_fov = 45.0_degf;
 
@@ -442,14 +442,14 @@ void create_solar_system()
             universe::UCompPlanet &planet = typePlanet.add_get_ucomp(sat);
 
             // set radius
-            planet.m_radius = 128;
+            planet.m_radius = 1737000.0f;
 
             auto &posTraj = uni.get_reg().get<universe::UCompTransformTraj>(sat);
 
             // space planets 400m apart from each other
             // 1024 units = 1 meter
             posTraj.m_position = {x * 1024l * 400l,
-                                  1024l * -140l,
+                                  1024l * -1737500l,
                                   z * 1024l * 400l};
         }
     }
