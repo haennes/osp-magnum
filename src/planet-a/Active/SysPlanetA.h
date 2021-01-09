@@ -54,8 +54,7 @@ struct ACompPlanet
 };
 
 
-class SysPlanetA : public osp::active::IDynamicSystem,
-                   public osp::active::IActivator
+class SysPlanetA : public osp::active::IDynamicSystem
 {
 public:
 

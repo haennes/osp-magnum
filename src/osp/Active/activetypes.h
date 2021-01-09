@@ -45,6 +45,9 @@ struct ACompTransform;
 
 constexpr unsigned gc_heir_physics_level = 1;
 
+using MapActiveScene_t = std::map<std::string, osp::active::ActiveScene,
+                                  std::less<> >;
+
 enum class ActiveEnt: entt::id_type {};
 
 inline std::ostream& operator<<(std::ostream& os, ActiveEnt e)

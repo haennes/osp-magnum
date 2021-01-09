@@ -25,7 +25,7 @@
 #pragma once
 
 #include <osp/Universe.h>
-
+#include <osp/Satellites/SatActiveArea.h>
 
 namespace planeta::universe
 {

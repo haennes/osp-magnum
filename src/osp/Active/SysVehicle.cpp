@@ -54,6 +54,7 @@ SysVehicle::SysVehicle(ActiveScene &scene)
        [this] (ActiveScene& rScene) { this->update_vehicle_modification(rScene); })
 { }
 
+/*
 StatusActivated SysVehicle::activate_sat(ActiveScene &scene,
                                          SysAreaAssociate &area,
                                          universe::Satellite areaSat,
@@ -218,6 +219,7 @@ StatusActivated SysVehicle::activate_sat(ActiveScene &scene,
 
     return {0, vehicleEnt, true};
 }
+*/
 
 int SysVehicle::deactivate_sat(ActiveScene &scene, SysAreaAssociate &area,
         universe::Satellite areaSat, universe::Satellite tgtSat,

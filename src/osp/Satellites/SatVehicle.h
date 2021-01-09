@@ -25,6 +25,7 @@
 #pragma once
 
 #include "../Universe.h"
+#include "SatActiveArea.h"
 
 #include "../Resource/Resource.h"
 #include "../Resource/blueprints.h"

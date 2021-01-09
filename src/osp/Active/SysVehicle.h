@@ -90,7 +90,7 @@ struct ACompPart
     unsigned m_separationIsland{0};
 };
 
-class SysVehicle : public IDynamicSystem, public IActivator
+class SysVehicle : public IDynamicSystem
 {
 public:
 

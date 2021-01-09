@@ -241,12 +241,6 @@ struct UCompType
     ITypeSatellite* m_type{nullptr};
 };
 
-struct UCompActivatable
-{
-    // put something here some day
-    int m_dummy;
-};
-
 
 /**
  * A specific type of Satellite. A planet, star, vehicle, etc...
@@ -279,7 +273,7 @@ public:
     virtual void add(Satellite sat) { add_get_ucomp(sat); };
     virtual void remove(Satellite sat) override;
 
-    std::tuple<UCOMP_T& ...> add_get_ucomp_all(Satellite sat);
+    auto add_get_ucomp_all(Satellite sat);
     auto& add_get_ucomp(Satellite sat);
 
     constexpr Universe& get_universe() { return m_universe; }
@@ -289,32 +283,40 @@ private:
     Universe& m_universe;
 };
 
+template<typename UCOMP_T>
+constexpr decltype (auto) emplace_filter_tags(Universe& rUni, Satellite& sat)
+{
+    if constexpr (std::is_empty<UCOMP_T>::value)
+    {
+        // Return empty tuple if tag struct
+        rUni.get_reg().emplace<UCOMP_T>(sat);
+        return std::tuple{};
+    }
+    else
+    {
+        // Return reference tuple for normal struct
+        return std::tuple<UCOMP_T&>{rUni.get_reg().emplace<UCOMP_T>(sat)};
+    }
+}
+
 template<typename TYPESAT_T, typename ... UCOMP_T>
-std::tuple<UCOMP_T& ...> CommonTypeSat<TYPESAT_T, UCOMP_T ...>::add_get_ucomp_all(Satellite sat)
+auto CommonTypeSat<TYPESAT_T, UCOMP_T ...>::add_get_ucomp_all(Satellite sat)
 {
     auto& type = m_universe.get_reg().get<UCompType>(sat);
 
-    if (type.m_type != nullptr)
-    {
-        //return ;
-    }
+    assert(type.m_type != nullptr);
 
     type.m_type = this;
-    return std::forward_as_tuple((m_universe.get_reg().emplace<UCOMP_T>(sat)) ...);
+    return std::tuple_cat(emplace_filter_tags<UCOMP_T>(m_universe, sat) ...);
 }
 
 template<typename TYPESAT_T, typename ... UCOMP_T>
 auto& CommonTypeSat<TYPESAT_T, UCOMP_T ...>::add_get_ucomp(Satellite sat)
 {
     auto& type = m_universe.get_reg().get<UCompType>(sat);
-
-    if (type.m_type != nullptr)
-    {
-        //return ;
-    }
-
     type.m_type = this;
-    return std::get<0>(std::forward_as_tuple((m_universe.get_reg().emplace<UCOMP_T>(sat)) ...));
+
+    return std::get<0>(add_get_ucomp_all(sat));
 }
 
 template<typename TYPESAT_T, typename ... UCOMP_T>

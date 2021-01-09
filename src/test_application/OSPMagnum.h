@@ -45,9 +45,6 @@
 namespace testapp
 {
 
-using MapActiveScene_t = std::map<std::string, osp::active::ActiveScene,
-                                  std::less<> >;
-
 class OSPMagnum : public Magnum::Platform::Application
 {
 
@@ -70,7 +67,7 @@ public:
     osp::active::ActiveScene& scene_create(std::string&& name);
 
     constexpr osp::UserInputHandler& get_input_handler() { return m_userInput; }
-    constexpr MapActiveScene_t& get_scenes() { return m_scenes; }
+    constexpr osp::active::MapActiveScene_t& get_scenes() { return m_scenes; }
 
 private:
 
@@ -78,7 +75,7 @@ private:
 
     osp::UserInputHandler m_userInput;
 
-    MapActiveScene_t m_scenes;
+    osp::active::MapActiveScene_t m_scenes;
 
     osp::Package m_glResources{"gl", "gl-resources"};
 

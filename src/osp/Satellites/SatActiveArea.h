@@ -33,6 +33,8 @@
 //#include <Magnum/SceneGraph/Camera.h>
 
 #include "../types.h"
+#include "../Active/activetypes.h"
+
 //#include "../scene.h"
 
 #include "../Resource/Package.h"
@@ -50,12 +52,24 @@ namespace osp::universe
 class OSPMagnum;
 class SatActiveArea;
 
+struct UCompActivatable { };
+
+struct UCompActivationMutable
+{
+    Satellite m_area{entt::null};
+    active::ActiveEnt m_ent{entt::null};
+};
+
+struct UCompActivationRadius
+{
+    float m_radius;
+};
 
 struct UCompActiveArea
 {
     //active::ActiveEnt m_camera;
 
-    unsigned m_sceneIndex;
+    active::MapActiveScene_t::iterator m_scene;
 
     // true when the ActiveArea is moving
     bool m_inMotion;
@@ -71,23 +85,6 @@ public:
 
     SatActiveArea(Universe& universe);
     ~SatActiveArea() = default;
-
-    /**
-     * Setup magnum scene and sets m_loadedActive to true.
-     * @return only 0 for now
-     */
-    //int activate(OSPApplication& app);
-
-    /**
-     * Do actual drawing of scene. Call only on context thread.
-     */
-    void draw_gl();
-    
-    /**
-     * Load nearby satellites, Maybe request a floating origin translation,
-     * then calls update_physics of ActiveScene
-     */
-    void update_physics(float deltaTime);
 
     std::string get_name() { return smc_name; };
 

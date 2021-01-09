@@ -95,7 +95,7 @@ void testapp::test_flight(std::unique_ptr<OSPMagnum>& pMagnumApp,
     auto &sysPhysics        = scene.dynamic_system_create<osp::active::SysPhysics_t>();
     auto &sysWire           = scene.dynamic_system_create<osp::active::SysWire>();
     auto &sysDebugRender    = scene.dynamic_system_create<osp::active::SysDebugRender>();
-    auto &sysArea           = scene.dynamic_system_create<osp::active::SysAreaAssociate>(uni);
+    auto &sysArea           = scene.dynamic_system_create<osp::active::SysAreaAssociate>();
     auto &sysVehicle        = scene.dynamic_system_create<osp::active::SysVehicle>();
     auto &sysExhaustPlume   = scene.dynamic_system_create<osp::active::SysExhaustPlume>();
     auto &sysPlanet         = scene.dynamic_system_create<planeta::active::SysPlanetA>(pMagnumApp->get_input_handler());
@@ -106,8 +106,8 @@ void testapp::test_flight(std::unique_ptr<OSPMagnum>& pMagnumApp,
     scene.system_machine_create<SysMachineRocket>();
 
     // Make active areas load vehicles and planets
-    sysArea.activator_add(&satVehicle, sysVehicle);
-    sysArea.activator_add(&satPlanet, sysPlanet);
+    //sysArea.activator_add(&satVehicle, sysVehicle);
+    //sysArea.activator_add(&satPlanet, sysPlanet);
 
     // create a Satellite with an ActiveArea
     Satellite areaSat = uni.sat_create();
@@ -116,7 +116,7 @@ void testapp::test_flight(std::unique_ptr<OSPMagnum>& pMagnumApp,
     UCompActiveArea &area = satAA.add_get_ucomp(areaSat);
 
     // Link ActiveArea to scene using the AreaAssociate
-    sysArea.connect(areaSat);
+    //sysArea.connect(areaSat);
 
     // Add default-constructed physics world to scene
     scene.get_registry().emplace<osp::active::ACompPhysicsWorld_t>(scene.hier_get_root());
@@ -155,7 +155,7 @@ void testapp::test_flight(std::unique_ptr<OSPMagnum>& pMagnumApp,
     std::cout << "Magnum Application closed\n";
 
     // Disconnect ActiveArea
-    sysArea.disconnect();
+    //sysArea.disconnect();
 
     // destruct the application, this closes the window
     pMagnumApp.reset();

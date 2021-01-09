@@ -53,6 +53,7 @@ using osp::universe::Satellite;
 
 const std::string SysPlanetA::smc_name = "PlanetA";
 
+/*
 StatusActivated SysPlanetA::activate_sat(
         osp::active::ActiveScene &scene,
         osp::active::SysAreaAssociate &area,
@@ -91,6 +92,7 @@ StatusActivated SysPlanetA::activate_sat(
 
     return {0, planetEnt, false};
 }
+*/
 
 SysPlanetA::SysPlanetA(osp::active::ActiveScene &scene,
                        osp::UserInputHandler &userInput)
@@ -104,7 +106,7 @@ SysPlanetA::SysPlanetA(osp::active::ActiveScene &scene,
  , m_debugUpdate(userInput.config_get("debug_planet_update"))
 { }
 
-
+/*
 int SysPlanetA::deactivate_sat(osp::active::ActiveScene &scene,
                                osp::active::SysAreaAssociate &area,
                                osp::universe::Satellite areaSat,
@@ -114,7 +116,7 @@ int SysPlanetA::deactivate_sat(osp::active::ActiveScene &scene,
     // TODO: Delete the planet entity from the scene
     return 0;
 }
-
+*/
 void SysPlanetA::draw(osp::active::ACompCamera const& camera)
 {
     // TODO: move planet drawing to something more generic, like debug drawable
@@ -255,7 +257,7 @@ void SysPlanetA::planet_update_geometry(osp::active::ActiveEnt planetEnt)
     auto &rPlanetPlanet = m_scene.reg_get<ACompPlanet>(planetEnt);
     auto const &planetTf = m_scene.reg_get<ACompTransform>(planetEnt);
     auto const &planetActivated = m_scene.reg_get<ACompActivatedSat>(planetEnt);
-
+/*
     // TODO: de-spaghettify systems. make systems entirely stateless
     osp::universe::Universe const &uni = m_scene.dynamic_system_find<SysAreaAssociate>().get_universe();
 
@@ -356,7 +358,7 @@ void SysPlanetA::planet_update_geometry(osp::active::ActiveEnt planetEnt)
 
     rPlanetPlanet.m_mesh.setCount(rPlanetGeo.calc_index_count());
 
-    rPlanetGeo.get_ico_tree()->debug_verify_state();
+    rPlanetGeo.get_ico_tree()->debug_verify_state();*/
 }
 
 void SysPlanetA::update_physics(ActiveScene& rScene)
