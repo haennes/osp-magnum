@@ -28,6 +28,7 @@ To build this project do the following steps:
 >>git clone --recurse-submodules https://github.com/TheOpenSpaceProgram/osp-magnum.git```
 
 >># or init them if you forgot to do so
+>>```bash
 >>cd ./osp-magnum
 >>git submodule init
 >>git submodule update
